@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    
+
     'appointments',
     'artists',
     'cart',
@@ -26,6 +26,9 @@ INSTALLED_APPS = [
     'services',
     'users',
 ]
+
+# Custom user model
+AUTH_USER_MODEL = 'users.User'
 
 # Middleware
 MIDDLEWARE = [
@@ -65,14 +68,24 @@ WSGI_APPLICATION = 'beautyVerseAPI.wsgi.application'
 # Database (Aiven Postgres)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
         'PORT': config('DB_PORT', cast=int),
-        'OPTIONS': {'sslmode': 'require'},
+        'OPTIONS': {'ssl_mode': 'REQUIRED'},
     }
+}
+
+# REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
 
 # Password validation
@@ -93,6 +106,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'  
 MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 # Default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
