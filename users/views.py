@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .serializers import RegisterSerializer, LoginSerializer
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 
 # Registration endpoint
 class RegisterView(generics.CreateAPIView):
