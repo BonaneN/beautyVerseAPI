@@ -22,5 +22,5 @@ env/
 .DB_Store
 
 # Ignore migrations except initial
-**/migrations/!0001_initial.py
+**/migrations/
 **/migrations/__pycache__/
