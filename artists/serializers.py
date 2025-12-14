@@ -5,7 +5,7 @@ from services.serializers import ServiceSerializer
 class ArtistAvailabilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtistAvailability
-        fields = ['id', 'date', 'start_time', 'end_time', 'is_booked']
+        fields = ['id', 'date', 'start_time', 'end_time']
 
 class ArtistSerializer(serializers.ModelSerializer):
     availabilities = ArtistAvailabilitySerializer(many=True, read_only=True)

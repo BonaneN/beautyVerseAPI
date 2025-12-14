@@ -29,7 +29,6 @@ class ArtistAvailability(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    is_booked = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('artist', 'date', 'start_time')
