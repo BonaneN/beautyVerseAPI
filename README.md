@@ -4,9 +4,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-4.0%2B-092E20?style=for-the-badge&logo=django&logoColor=white)
-![DRF](https://img.shields.io/badge/Django_REST-Framework-ff1744?style=for-the-badge&logo=django&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![Render](https://img.shields.io/badge/Deployment-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)
 
 **The ultimate backend solution for hybrid beauty e-commerce and professional booking platforms.**
 
@@ -110,5 +108,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-    <sub>Built by the BeautyVerse Team</sub>
+    <sub>Built by Bonane NIYIGENA</sub>
 </div>
