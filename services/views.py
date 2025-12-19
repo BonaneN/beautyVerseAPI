@@ -1,4 +1,5 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
+from rest_framework.response import Response
 from .models import Service
 from .serializers import ServiceSerializer
 
@@ -14,7 +15,10 @@ class ServiceViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        artist = serializer.validated_data['artist']
-        if artist.created_by != self.request.user:
-            raise permissions.PermissionDenied("You do not own this artist profile.")
-        serializer.save()
+        user = self.request.user
+        artist = user.artist_profiles.first()
+        
+        if not artist:
+            raise serializers.ValidationError({"detail": "You must create an Artist profile first."})
+            
+        serializer.save(artist=artist)

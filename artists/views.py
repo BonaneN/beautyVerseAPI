@@ -1,8 +1,8 @@
 from rest_framework import viewsets, permissions, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Artist, ArtistAvailability
-from .serializers import ArtistSerializer, ArtistAvailabilitySerializer
+from .models import Artist, ArtistAvailability, ArtistCategory
+from .serializers import ArtistSerializer, ArtistAvailabilitySerializer, ArtistCategorySerializer
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
@@ -10,12 +10,19 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
         return obj.created_by == request.user
 
+class ArtistCategoryViewSet(viewsets.ModelViewSet):
+    queryset = ArtistCategory.objects.all()
+    serializer_class = ArtistCategorySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
+
 class ArtistViewSet(viewsets.ModelViewSet):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'location', 'category']
+    search_fields = ['name', 'brand_name', 'location']
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
@@ -42,7 +49,10 @@ class ArtistAvailabilityViewSet(viewsets.ModelViewSet):
         return ArtistAvailability.objects.filter(artist__created_by=self.request.user)
 
     def perform_create(self, serializer):
-        artist = serializer.validated_data['artist']
-        if artist.created_by != self.request.user:
-            raise permissions.PermissionDenied("You do not own this artist profile.")
-        serializer.save()
+        user = self.request.user
+        artist = user.artist_profiles.first()
+        
+        if not artist:
+             raise serializers.ValidationError({"detail": "You must create an Artist profile first."})
+             
+        serializer.save(artist=artist)

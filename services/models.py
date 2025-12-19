@@ -1,14 +1,17 @@
 from django.db import models
+from artists.models import Artist, ArtistCategory
 
 class Service(models.Model):
-    artist = models.ForeignKey('artists.Artist', on_delete=models.CASCADE, related_name='services')
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    duration = models.DurationField(help_text="Duration of the service (e.g. 00:30:00)")
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='services')
+    category = models.ForeignKey(ArtistCategory, on_delete=models.CASCADE, related_name='services')
+    is_home_service = models.BooleanField(default=False)
+    portfolio_images = models.JSONField(default=list, blank=True) # Max 3 images validation in Serializer
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = ('artist', 'category')
+
     def __str__(self):
-        return f"{self.name} - {self.artist.name}"
+        return f"{self.artist} - {self.category.name}"
