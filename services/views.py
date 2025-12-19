@@ -13,6 +13,21 @@ class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['category__name', 'artist__brand_name']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        location = self.request.query_params.get('location')
+        home_service = self.request.query_params.get('is_home_service')
+        
+        if location:
+            queryset = queryset.filter(artist__location__icontains=location)
+        if home_service:
+            is_home = home_service.lower() == 'true'
+            queryset = queryset.filter(is_home_service=is_home)
+            
+        return queryset
 
     def perform_create(self, serializer):
         user = self.request.user

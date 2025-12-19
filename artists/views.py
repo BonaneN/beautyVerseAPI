@@ -21,8 +21,21 @@ class ArtistViewSet(viewsets.ModelViewSet):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name', 'brand_name', 'location']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        location = self.request.query_params.get('location')
+        home_service = self.request.query_params.get('services__is_home_service') or self.request.query_params.get('is_home_service')
+        
+        if location:
+            queryset = queryset.filter(location__icontains=location)
+        if home_service:
+            is_home = home_service.lower() == 'true'
+            queryset = queryset.filter(services__is_home_service=is_home).distinct()
+            
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
