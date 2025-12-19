@@ -14,7 +14,7 @@ class ArtistAvailabilitySerializer(serializers.ModelSerializer):
         read_only_fields = ['is_booked']
 
 class ArtistSerializer(serializers.ModelSerializer):
-    availabilities = ArtistAvailabilitySerializer(many=True, read_only=True)
+    available_slots = ArtistAvailabilitySerializer(many=True, read_only=True)
     services = ServiceSerializer(many=True, read_only=True)
     
     class Meta:
@@ -22,7 +22,7 @@ class ArtistSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'brand_name', 'phone', 'whatsapp_contact', 
             'location', 'instagram', 'tiktok', 'created_by',
-            'availabilities', 'services', 'created_at'
+            'available_slots', 'services', 'created_at'
         ]
         read_only_fields = ['created_by', 'created_at']
 

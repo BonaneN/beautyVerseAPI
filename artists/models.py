@@ -39,7 +39,7 @@ class Artist(models.Model):
         return self.brand_name or self.name
 
 class ArtistAvailability(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='availabilities')
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='available_slots')
     date = models.DateField()
     time = models.TimeField()
     is_booked = models.BooleanField(default=False)
