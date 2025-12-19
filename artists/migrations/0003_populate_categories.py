@@ -14,7 +14,8 @@ def populate_categories(apps, schema_editor):
         "Lashes & Brows"
     ]
     for name in categories:
-        ArtistCategory.objects.get_or_create(name=name)
+        slug = name.lower().replace(' ', '-')
+        ArtistCategory.objects.get_or_create(name=name, defaults={'slug': slug})
 
 def remove_categories(apps, schema_editor):
     ArtistCategory = apps.get_model('artists', 'ArtistCategory')
