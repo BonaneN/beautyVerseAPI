@@ -1,5 +1,6 @@
 from django.urls import path
 
 urlpatterns = [
-    # Endpoints will be added here
+    path('list-products/', lambda r: None, name='product-list'),
+    path('add-new-product/', lambda r: None, name='product-add'),
 ]

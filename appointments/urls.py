@@ -1,5 +1,6 @@
 from django.urls import path
 
 urlpatterns = [
-    # Endpoints will be added here
+    path('book-session/', lambda r: None, name='appointment-book'),
+    path('my-appointments/', lambda r: None, name='appointment-list'),
 ]

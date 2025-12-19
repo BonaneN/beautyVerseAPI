@@ -1,5 +1,6 @@
 from django.urls import path
 
 urlpatterns = [
-    # Endpoints will be added here
+    path('view-my-cart/', lambda r: None, name='cart-view'),
+    path('add-item-to-cart/', lambda r: None, name='cart-add'),
 ]
