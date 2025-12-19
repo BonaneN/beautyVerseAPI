@@ -21,6 +21,5 @@ env/
 .idea/
 .DB_Store
 
-# Ignore migrations except initial
-**/migrations/
+# Ignore migrations cache
 **/migrations/__pycache__/
