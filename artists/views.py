@@ -32,9 +32,9 @@ class ArtistViewSet(viewsets.ModelViewSet):
         artist = self.get_object()
         date = request.query_params.get('date')
         if date:
-            slots = artist.availabilities.filter(date=date, is_booked=False)
+            slots = artist.available_slots.filter(date=date, is_booked=False)
         else:
-            slots = artist.availabilities.filter(is_booked=False)
+            slots = artist.available_slots.filter(is_booked=False)
         
         serializer = ArtistAvailabilitySerializer(slots, many=True)
         return Response(serializer.data)
