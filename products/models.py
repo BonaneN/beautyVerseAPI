@@ -19,13 +19,21 @@ class ProductCategory(models.Model):
         verbose_name_plural = "Product Categories"
 
 class Product(models.Model):
+    DELIVERY_OPTIONS = [
+        ('Free Delivery', 'Free Delivery'),
+        ('Paid Delivery', 'Paid Delivery (By Customer)'),
+        ('Shop Pickup', 'Picked from the shop'),
+    ]
+
     name = models.CharField(max_length=255)
+    short_description = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
     shop_location = models.CharField(max_length=255)
-    delivery_available = models.BooleanField(default=False)
+    delivery_option = models.CharField(max_length=20, choices=DELIVERY_OPTIONS, default='Shop Pickup')
+    product_image = models.ImageField(upload_to='products/', blank=True, null=True)
     category = models.ForeignKey(ProductCategory, on_delete=models.SET_NULL, null=True, related_name='products')
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
     created_at = models.DateTimeField(auto_now_add=True)
