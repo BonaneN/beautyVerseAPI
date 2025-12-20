@@ -23,7 +23,7 @@ class ArtistSerializer(serializers.ModelSerializer):
         model = Artist
         fields = [
             'id', 'name', 'brand_name', 'phone', 'whatsapp_contact', 
-            'location', 'instagram', 'tiktok', 'created_by',
+            'location', 'profile_picture', 'instagram', 'tiktok', 'created_by',
             'available_slots', 'services', 'created_at'
         ]
         read_only_fields = ['created_at']

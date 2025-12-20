@@ -42,9 +42,14 @@ class ArtistViewSet(viewsets.ModelViewSet):
         return queryset
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        user = self.request.user
+        serializer.save(created_by=user)
 
-    @action(detail=True, methods=['get'])
+        if user.role != 'artist':
+            user.role = 'artist'
+            user.save()
+
+    @action(detail=True, methods=['get'], permission_classes=[permissions.AllowAny])
     def available_slots(self, request, pk=None):
         artist = self.get_object()
         date = request.query_params.get('date')
