@@ -19,4 +19,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     ordering_fields = ['price', 'final_price', 'created_at']
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        user = self.request.user
+        serializer.save(created_by=user)
+        
+        if user.role == 'client':
+            user.role = 'seller'
+            user.save()

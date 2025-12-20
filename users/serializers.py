@@ -9,10 +9,9 @@ class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
 
-# Meta class to specify model and fields
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', 'role')
+        fields = ('username', 'password', 'password2', 'email')
 
 # Validate that the two passwords match
     def validate(self, attrs):
@@ -26,7 +25,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create(
             username = validated_data['username'],
             email = validated_data['email'],
-            role = validated_data.get('role', 'customer')
+            role = 'client'
         )
 
 # Set the user's password
