@@ -1,13 +1,7 @@
 from rest_framework import viewsets, permissions, filters
 from .models import Product, ProductCategory
 from .serializers import ProductSerializer, ProductCategorySerializer
-
-# Custom permission to only allow owners of an object to edit it.
-class IsOwnerOrReadOnly(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj.created_by == request.user
+from beautyVerseAPI.permissions import IsOwnerOrReadOnly
 
 class ProductCategoryViewSet(viewsets.ModelViewSet):
     queryset = ProductCategory.objects.all()

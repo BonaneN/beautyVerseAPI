@@ -3,12 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Artist, ArtistAvailability, ArtistCategory
 from .serializers import ArtistSerializer, ArtistAvailabilitySerializer, ArtistCategorySerializer
-
-class IsOwnerOrReadOnly(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj.created_by == request.user
+from beautyVerseAPI.permissions import IsOwnerOrReadOnly
 
 class ArtistCategoryViewSet(viewsets.ModelViewSet):
     queryset = ArtistCategory.objects.all()
