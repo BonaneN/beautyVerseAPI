@@ -3,7 +3,16 @@ from django.conf import settings
 from django.utils.text import slugify
 
 class ProductCategory(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    CATEGORY_CHOICES = [
+        ("Skincare", "Skincare"),
+        ("Makeup", "Makeup"),
+        ("Haircare", "Haircare"),
+        ("Nailcare", "Nailcare"),
+        ("Wellness", "Wellness"),
+        ("Fragrance", "Fragrance"),
+        ("Tools & Accessories", "Tools & Accessories"),
+    ]
+    name = models.CharField(max_length=100, unique=True, choices=CATEGORY_CHOICES)
     slug = models.SlugField(max_length=120, unique=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
