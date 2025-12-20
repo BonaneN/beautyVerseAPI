@@ -27,13 +27,22 @@ class ArtistViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         location = self.request.query_params.get('location')
-        home_service = self.request.query_params.get('services__is_home_service') or self.request.query_params.get('is_home_service')
+        home_service = self.request.query_params.get('home_service') or self.request.query_params.get('services__is_home_service') or self.request.query_params.get('is_home_service')
+        day_name = self.request.query_params.get('day')
         
         if location:
             queryset = queryset.filter(location__icontains=location)
         if home_service:
             is_home = home_service.lower() == 'true'
             queryset = queryset.filter(services__is_home_service=is_home).distinct()
+        if day_name:
+            days = {
+                'sunday': 1, 'monday': 2, 'tuesday': 3, 'wednesday': 4,
+                'thursday': 5, 'friday': 6, 'saturday': 7
+            }
+            day_num = days.get(day_name.lower())
+            if day_num:
+                queryset = queryset.filter(available_slots__date__week_day=day_num).distinct()
             
         return queryset
 

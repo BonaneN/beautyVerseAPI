@@ -20,12 +20,15 @@ class ServiceViewSet(viewsets.ModelViewSet):
         queryset = super().get_queryset()
         location = self.request.query_params.get('location')
         home_service = self.request.query_params.get('is_home_service')
+        category = self.request.query_params.get('category')
         
         if location:
             queryset = queryset.filter(artist__location__icontains=location)
         if home_service:
             is_home = home_service.lower() == 'true'
             queryset = queryset.filter(is_home_service=is_home)
+        if category:
+            queryset = queryset.filter(category__name__icontains=category)
             
         return queryset
 
