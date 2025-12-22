@@ -2,13 +2,13 @@
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-4.0%2B-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Python](https://img.shields.io/badge/Python?style=for-the-badge&logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django?style=for-the-badge&logo=django&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
 **The under development stage backend solution for hybrid beauty e-commerce and service booking platform.**
 
-[View Live Demo](#) | [Read Documentation](#)
+[View Live Demo](https://bonane00.pythonanywhere.com/beautyVerse/products/list-products/) | [Read Documentation](walkthrough.md)
 
 </div>
 
@@ -25,7 +25,20 @@
 - **Persistent Shopping Cart**: A modern cart implementation allowing users to aggregate professional products from various sellers.
 - **Advanced Filtering**: Deep search capabilities for both the product marketplace and the artist directory based on category, price, and location.
 
----
+
+## 📍 Primary API Endpoints
+
+| Category | Endpoint | Method | Description |
+| :--- | :--- | :--- | :--- |
+| **Auth** | `/beautyVerse/users/token/` | `POST` | Login & receive JWT access/refresh tokens. |
+| **Auth** | `/beautyVerse/users/create-account/` | `POST` | Register a new user account (Client by default). |
+| **Artists** | `/beautyVerse/artists/list-artists/` | `GET` | **Public**. Browse all professional artist profiles. |
+| **Artists** | `/beautyVerse/artists/register-artist/` | `POST` | Create an artist profile (Upgrades tag to `artist`). |
+| **Products**| `/beautyVerse/products/list-products/` | `GET` | **Public**. Browse the beauty product marketplace. |
+| **Products**| `/beautyVerse/products/add-new-product/`| `POST` | Post a new product (Upgrades tag to `seller`). |
+| **Booking** | `/beautyVerse/appointments/book-session/`| `POST` | Book a specific time slot with an artist. |
+| **Cart** | `/beautyVerse/cart/view-my-cart/` | `GET` | View items in your personal shopping cart. |
+
 
 ## Tech Stack
 -   **Framework**: Django & Django REST Framework
@@ -33,7 +46,6 @@
 -   **Auth**: SimpleJWT
 -   **Dependencies**: [requirements.txt](requirements.txt)
 
----
 
 ## Installation guide
 
@@ -80,7 +92,6 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
----
 
 ## 👨‍💻 Built By
 **Bonane NIYIGENA**
