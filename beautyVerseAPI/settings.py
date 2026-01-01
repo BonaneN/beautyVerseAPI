@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS=['bonane00.pythonanywhere.com']
+ALLOWED_HOSTS = ['bonane00.pythonanywhere.com']
 
 # Installed apps
 INSTALLED_APPS = [
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'drf_spectacular',  # Added for Swagger/OpenAPI
 
     'appointments',
     'artists',
@@ -67,7 +68,7 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = 'beautyVerseAPI.wsgi.application'
 
-# Database (Aiven Postgres)
+# Database (Aiven Postgres / MySQL)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -88,6 +89,27 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    # Add schema class for drf-spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# Swagger / drf-spectacular settings
+SPECTACULAR_SETTINGS = {
+    "TITLE": "BeautyVerse API - ALX Capstone",
+    "DESCRIPTION": "API documentation for BeautyVerse project",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SECURITY": [{"BearerAuth": []}],  # JWT auth
+    "COMPONENTS": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Enter JWT token like: Bearer <your_token>"
+            }
+        }
+    },
 }
 
 # Password validation
