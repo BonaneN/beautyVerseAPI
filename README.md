@@ -8,7 +8,7 @@
 
 **The under development stage backend solution for hybrid beauty e-commerce and service booking platform.**
 
-[https://bonane00.pythonanywhere.com/api/docs
+[API SWAGGER DOCUMENTATION
 ](https://bonane00.pythonanywhere.com/api/docs/)
 </div>
 
