@@ -9,7 +9,7 @@
 **The under development stage backend solution for hybrid beauty e-commerce and service booking platform.**
 
 [API SWAGGER DOCUMENTATION
-](https://bonane00.pythonanywhere.com/api/docs/)
+](https://bonane00.pythonanywhere.com/api/docs/) || [POSTMAN PUBLIC COLLECTION LINK](https://www.postman.com/rbonane336/beautyverse-public/collection/48914431-865262c4-80a1-41b7-856b-969700359350/?action=share&creator=0)
 </div>
 
 
