@@ -8,7 +8,7 @@
 
 **The under development stage backend solution for hybrid beauty e-commerce and service booking platform.**
 
-[View Live Demo](https://bonane00.pythonanywhere.com/beautyVerse/products/list-products/) | [Read Documentation](walkthrough.md)
+[Read Documentation]((https://bonane00.pythonanywhere.com/api/docs/))
 
 </div>
 
