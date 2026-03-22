@@ -8,12 +8,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Your app URLs
-    path('beautyVerse/users/', include('users.urls')),
-    path('beautyVerse/artists/', include('artists.urls')),
-    path('beautyVerse/products/', include('products.urls')),
-    path('beautyVerse/cart/', include('cart.urls')),
-    path('beautyVerse/services/', include('services.urls')),
-    path('beautyVerse/appointments/', include('appointments.urls')),
+    path('glowKGL/users/', include('users.urls')),
+    path('glowKGL/artists/', include('artists.urls')),
+    path('glowKGL/products/', include('products.urls')),
+    path('glowKGL/cart/', include('cart.urls')),
+    path('glowKGL/services/', include('services.urls')),
+    path('glowKGL/appointments/', include('appointments.urls')),
 
     # Swagger / API documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

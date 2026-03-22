@@ -95,8 +95,8 @@ REST_FRAMEWORK = {
 
 # Swagger / drf-spectacular settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "BeautyVerse API - ALX Capstone",
-    "DESCRIPTION": "API documentation for BeautyVerse project",
+    "TITLE": "GlowKGL API - ALX Capstone",
+    "DESCRIPTION": "API documentation for GlowKGL project",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "SECURITY": [{"BearerAuth": []}],  # JWT auth
